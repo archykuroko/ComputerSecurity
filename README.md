@@ -224,7 +224,7 @@ node test/brute_force.js
 ## 📁 Reporte
 
 El archivo del reporte completo se encuentra en el repositorio:
-
+https://github.com/archykuroko/ComputerSecurity/blob/main/Reporte%20de%20proyecto.pdf
 
 Incluye:
 - Documentación técnica
