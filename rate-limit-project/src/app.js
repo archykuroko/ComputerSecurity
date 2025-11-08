@@ -1,0 +1,58 @@
+import express from "express";
+import session from "express-session";
+import helmet from "helmet";
+import dotenv from "dotenv";
+import rateLimit from "express-rate-limit";
+import path from "path";
+import { PrismaClient } from "@prisma/client";
+import authRoutes from "./routes/authRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+
+dotenv.config();
+const app = express();
+new PrismaClient(); // mantiene pool inicializado
+
+app.use(helmet());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, sameSite: "strict" },
+  })
+);
+
+// Disponibiliza el usuario en TODAS las vistas
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
+// Rate limit específico para /login
+const loginLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 5,
+  message: "Demasiados intentos fallidos. Intenta de nuevo en 5 minutos.",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Vistas
+app.set("view engine", "ejs");
+app.set("views", path.join(process.cwd(), "src/views"));
+
+// Redirigir raíz
+app.get("/", (req, res) => res.redirect("/login"));
+
+app.use("/", (req, res, next) =>
+  req.method === "POST" && req.path === "/login"
+    ? loginLimiter(req, res, next)
+    : next()
+);
+app.use("/", authRoutes);
+app.use("/admin", adminRoutes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));

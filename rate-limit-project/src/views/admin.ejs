@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+  <div class="card">
+    <h2>Panel Admin</h2>
+    <p class="muted">Usuarios registrados (conteo): <strong><%= typeof usersCount !== 'undefined' ? usersCount : '-' %></strong></p>
+    <div class="actions">
+      <a class="btn" href="/admin/users">Ver usuarios</a>
+      <a href="/user">Volver al panel</a>
+    </div>
+  </div>
+<%- include('partials/footer') %>

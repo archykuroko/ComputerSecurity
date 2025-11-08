@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+  <div class="card">
+    <h2>Usuarios</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Email</th><th>Rol</th><th>Creado</th><th>Acciones</th></tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.id %></td>
+            <td><%= u.email %></td>
+            <td><%= u.role %></td>
+            <td><%= new Date(u.createdAt).toLocaleString() %></td>
+            <td>
+              <form style="display:inline" method="POST" action="/admin/users/<%= u.id %>/role">
+                <select name="role">
+                  <option value="user" <%= u.role==='user'?'selected':'' %>>user</option>
+                  <option value="admin" <%= u.role==='admin'?'selected':'' %>>admin</option>
+                </select>
+                <button class="btn" type="submit">Cambiar</button>
+              </form>
+              <form style="display:inline" method="POST" action="/admin/users/<%= u.id %>/delete" onsubmit="return confirm('¿Eliminar usuario?')">
+                <button class="btn" type="submit">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <div class="actions" style="margin-top:12px">
+      <a href="/admin">Volver</a>
+    </div>
+  </div>
+<%- include('partials/footer') %>

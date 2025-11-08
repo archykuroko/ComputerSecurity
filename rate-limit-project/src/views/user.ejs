@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+  <div class="card">
+    <h2>Panel de Usuario</h2>
+    <% if (user) { %>
+      <p>Bienvenido <strong><%= user.email %></strong>.</p>
+      <p class="muted">Rol actual: <strong><%= user.role %></strong></p>
+    <% } %>
+    <div class="actions">
+      <a class="btn" href="/logout" style="display:inline-block">Cerrar sesión</a>
+      <% if (user && user.role === 'admin') { %>
+        <a class="btn" href="/admin" style="display:inline-block">Ir a Admin</a>
+      <% } %>
+    </div>
+  </div>
+<%- include('partials/footer') %>

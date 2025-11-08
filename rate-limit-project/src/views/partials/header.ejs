@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rate Limit Demo</title>
+  <style>
+    :root{--bg:#0f172a;--card:#111827;--muted:#94a3b8;--text:#e5e7eb;--acc:#22d3ee;}
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    body{margin:0;background:linear-gradient(180deg,#0b1220,#0f172a);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:#0b1220;border-bottom:1px solid #1f2937}
+    .brand{color:#fff;font-weight:700;letter-spacing:.5px}
+    .userpill{color:#0b1220;background:linear-gradient(90deg,#22d3ee,#60a5fa);padding:6px 10px;border-radius:999px;font-size:.85rem}
+    .wrap{max-width:720px;margin:28px auto;padding:0 16px}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:22px;color:var(--text);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1,h2{margin:0 0 8px;color:#fff}
+    p{color:var(--muted)}
+    input,select,button{padding:10px 12px;border-radius:10px;border:1px solid #334155;background:#0b1220;color:#e5e7eb}
+    input:focus,select:focus{outline:2px solid var(--acc)}
+    .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{cursor:pointer;background:linear-gradient(90deg,#22d3ee,#60a5fa);border:0;color:#0b1220;font-weight:600}
+    a{color:#7dd3fc;text-decoration:none}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #1f2937;text-align:left}
+    th{color:#cbd5e1}
+    .muted{color:#94a3b8}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">🛡️ Rate Limit Demo</div>
+    <% if (user) { %>
+      <div class="userpill"><%= user.email %> — <strong><%= user.role %></strong></div>
+    <% } %>
+  </nav>
+  <div class="wrap">

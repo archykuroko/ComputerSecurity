@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+  <div class="card">
+    <h2>Registro</h2>
+    <% if (error) { %><p style="color:#fca5a5"><%= error %></p><% } %>
+    <form method="POST" action="/register">
+      <input type="email" name="email" placeholder="Correo" required style="width:100%"><br/><br/>
+      <input type="password" name="password" placeholder="Contraseña" required style="width:100%"><br/>
+      <div class="actions">
+        <button class="btn" type="submit">Registrar</button>
+        <a href="/login">Ya tengo cuenta</a>
+      </div>
+    </form>
+  </div>
+<%- include('partials/footer') %>

@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+  <div class="card">
+    <h2>Inicio de Sesión</h2>
+    <% if (error) { %><p style="color:#fca5a5"><%= error %></p><% } %>
+    <% if (ok) { %><p style="color:#86efac"><%= ok %></p><% } %>
+    <form method="POST" action="/login">
+      <p class="muted">Después de 5 intentos fallidos en 5 minutos, el sistema responderá 429 (rate limit).</p>
+      <input type="email" name="email" placeholder="Correo" required style="width:100%"><br/><br/>
+      <input type="password" name="password" placeholder="Contraseña" required style="width:100%"><br/>
+      <div class="actions">
+        <button class="btn" type="submit">Entrar</button>
+        <a href="/register">Crear cuenta</a>
+      </div>
+    </form>
+  </div>
+<%- include('partials/footer') %>
